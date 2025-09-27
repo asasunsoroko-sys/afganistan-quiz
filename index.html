@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Афганская война — Викторина</title>
+  <style>
+    body { font-family: sans-serif; background: #f0f4f8; margin: 0; padding: 20px; }
+    h1 { text-align: center; font-size: 24px; margin-bottom: 20px; }
+    .question { background: #fff; padding: 15px; margin-bottom: 12px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .question.correct { background: #d4f7dc; }
+    .question.wrong { background: #fddede; }
+    .question p { margin: 0 0 10px; font-weight: bold; }
+    label { display: block; margin-bottom: 6px; }
+    button { display: block; width: 100%; padding: 12px; font-size: 16px; margin-top: 20px; background: #2f6fed; color: white; border: none; border-radius: 8px; }
+    .result { margin-top: 20px; text-align: center; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Викторина: Афганская война</h1>
+  <div id="quiz"></div>
+  <button onclick="checkAnswers()">Проверить ответы</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    const questions = [
+      { q: "В каком году началась Афганская война?", a: ["1979", "1985", "1991", "1975"], correct: 0 },
+      { q: "Сколько лет длилась Афганская война?", a: ["5", "10", "15", "20"], correct: 1 },
+      { q: "Когда советские войска покинули Афганистан?", a: ["1989", "1991", "1985", "1993"], correct: 0 },
+      { q: "Как назывался ввод войск?", a: ["Операция Багратион", "Ограниченный контингент", "Барбаросса", "Шторм"], correct: 1 },
+      { q: "Как называли повстанцев?", a: ["Моджахеды", "Партизаны", "Гвардейцы", "Легионы"], correct: 0 },
+      { q: "Столица Афганистана?", a: ["Кабул", "Кандагар", "Герат", "Мазари-Шариф"], correct: 0 },
+      { q: "Как называли советских солдат?", a: ["Афганцы", "Ветераны", "Сибиряки", "Союзники"], correct: 0 },
+      { q: "Памятная дата интернационалистов?", a: ["15 февраля", "9 мая", "22 июня", "23 февраля"], correct: 0 },
+      { q: "Какие войска использовались в горах?", a: ["Танковые", "ВДВ", "Флот", "Артиллерия"], correct: 1 },
+      { q: "Популярный бронетранспортёр?", a: ["БТР-70", "Т-34", "Ил-2", "Як-9"], correct: 0 },
+      { q: "Какая страна была союзником СССР?", a: ["Афганистан", "Индия", "США", "Китай"], correct: 0 },
+      { q: "Как назывался президент Афганистана в 1979?", a: ["Амин", "Наджибулла", "Карзай", "Гани"], correct: 0 },
+      { q: "Какая цель была у СССР?", a: ["Поддержка режима", "Захват нефти", "Оккупация", "Контроль границы"], correct: 0 },
+      { q: "Какая страна поддерживала моджахедов?", a: ["США", "Куба", "Иран", "Монголия"], correct: 0 },
+      { q: "Как назывался фильм о войне?", a: ["9 рота", "Брестская крепость", "Сталинград", "Т-34"], correct: 0 }
+    ];
+
+    const quiz = document.getElementById("quiz");
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = <p>${i+1}. ${q.q}</p> + q.a.map((opt, j) =>
+        <label><input type="radio" name="q${i}" value="${j}"> ${opt}</label>).join("");
+      quiz.appendChild(div);
+    });
+
+    function checkAnswers() {
+      let correctCount = 0;
+      questions.forEach((q, i) => {
+        const selected = document.querySelector(input[name="q${i}"]:checked);
+        const div = quiz.children[i];
+        div.classList.remove("correct", "wrong");
+        if (selected) {
+          if (+selected.value === q.correct) {
+            div.classList.add("correct");
+            correctCount++;
+          } else {
+            div.classList.add("wrong");
+          }
+        }
+      });
+      document.getElementById("result").textContent = Правильных ответов: ${correctCount} из ${questions.length};
+    }
+  </script>
+</body>
+</html>
